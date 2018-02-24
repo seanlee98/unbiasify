@@ -20,7 +20,7 @@ const URLS = {
 }
 
 const STYLES = {
-  hidden: '{ visibility: visible !important; }',
+  hidden: '{ visibility: hidden !important; }',
   hiddenRelative: '{ visibility: hidden !important; position: relative; }',
   linkText: '{ content: "Link to Profile"; visibility: visible; }',
   candidateName: '{ content: "Candidate Name"; visibility: visible; }',
@@ -209,8 +209,7 @@ const STYLE_SHEETS = {
   },
   youtube: {
     photos: [
-      `img.style-scope.yt-img-shadow img ${STYLES.hidden}`,
-      `a.yt-simple-endpoint.inline-block.style-scope.ytd-thumbnail[style*="visibility: hidden"]`,
+      `a.yt-simple-endpoint.inline-block.style-scope.ytd-thumbnail > yt-image-shadow.style-scope.ytd-thumbnail.no-transition > img.style-scope.yt-img-shadow ${STYLES.hidden}`,
     ],
     photoId: 'BIAS_YOUTUBE_THUMBNAILS',
   },
@@ -241,11 +240,7 @@ var greenhouseUpdater = createModel(
   TOGGLE_GREENHOUSE_PHOTOS,
   TOGGLE_GREENHOUSE_NAMES
 )()
-var youtubeUpdater = createModel(
-  'youtube',
-  TOGGLE_YOUTUBE_THUMBNAILS,
-  null
-)()
+var youtubeUpdater = createModel('youtube', TOGGLE_YOUTUBE_THUMBNAILS, null)()
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
