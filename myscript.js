@@ -46,6 +46,7 @@ const STYLES = {
   hiddenRelative: '{ visibility: hidden !important; position: relative; }',
   linkText: '{ content: "Link to Profile"; visibility: visible; }',
   candidateName: '{ content: "Candidate Name"; visibility: visible; }',
+  videoName: '{ text-transform: lowercase; visibility: visible; }',
   blur:
     '{ opacity: 0.5; -webkit-filter: blur(50px) !important; filter: blur(50px) !important; }',
   colorToBlack:
@@ -259,7 +260,7 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_MEETUP_PHOTOS', 
   }, 
   youtube: {
-    names: [  `.bold ${STYLES.hidden}`, ], 
+    names: [  `a[id*="video-title"] ${STYLES.videoName}`, ], 
     photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
     nameId: 'BIAS_YOUTUBE_NAMES', 
     photoId: 'BIAS_YOUTUBE_PHOTOS',
