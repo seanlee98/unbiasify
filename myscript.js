@@ -16,13 +16,10 @@ const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
 const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
 const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
 const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
-<<<<<<< HEAD
 const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
 const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
 
-=======
  
->>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
@@ -30,15 +27,12 @@ const URLS = {
   replit: 'repl.it',
   greenhouse: 'greenhouse.io',
   buzzfeed: 'buzzfeed.com',
-<<<<<<< HEAD
   youtube: 'youtube.com',
-  crunchbase: 'crunchbase.com'
-=======
+  crunchbase: 'crunchbase.com',
   github: 'github.com',
   buzzfeed: 'buzzfeed.com', 
   meetup: 'meetup.com',
   youtube: 'youtube.com'
->>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 }
 
 const STYLES = {
@@ -231,13 +225,13 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_GREENHOUSE_PHOTOS',
   },
   buzzfeed: {
-    names: [  `.bold ${STYLES.hidden}`, ], 
+    names: [  `.bold, .featured-card__headline.featured-card__headline--news.link-gray ${STYLES.hidden}`, ], 
     photos: [ `.card__image, 
                   .wire-frame__img,
                   .site-component-carousel__item__image, 
-                  .video-player,
-                  .item__image ${STYLES.blur}`, 
-              `.js-sidebar-content ${STYLES.hidden}`, 
+                  .wire-frame__img.featured-image.xs-relative card__image--big  ${STYLES.blur}`, 
+              `.js-sidebar-content, .item__image, .buzzblock-package-news__main-image, 
+              .buzzblock-package-visual__main-story-image, .more-stories__image-container, .video-player ${STYLES.hidden}`, 
             ], 
     nameId: 'BIAS_BUZZFEED_NAMES', 
     photoId: 'BIAS_BUZZFEED_PHOTOS',
