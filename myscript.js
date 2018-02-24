@@ -223,6 +223,7 @@ const STYLE_SHEETS = {
                   .site-component-carousel__item__image, 
                   .video-player,
                   .item__image ${STYLES.blur}`, 
+              `.js-sidebar-content ${STYLES.hidden}`, 
             ], 
     nameId: 'BIAS_BUZZFEED_NAMES', 
     photoId: 'BIAS_BUZZFEED_PHOTOS',
