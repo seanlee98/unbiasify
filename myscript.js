@@ -247,8 +247,8 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_GITHUB_PHOTOS',
   },
   meetup: {
-    names: [ `.groupMember-name, .memName ${STYLES.hidden}` ], 
-    photos: [ `.avatar, .text--bold, .mem-photo-background-60 ${STYLES.blur}` ], 
+    names: [ `.groupMember-name, .text--bold, .memName ${STYLES.hidden}` ], 
+    photos: [ `.avatar, .mem-photo-background-60 ${STYLES.blur}` ], 
     nameId: 'BIAS_MEETUP_NAMES', 
     photoId: 'BIAS_MEETUP_PHOTOS', 
   }, 
