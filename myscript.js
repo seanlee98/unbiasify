@@ -19,8 +19,6 @@ const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
 const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
 const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
 
- 
-const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
   angelList: 'angel.co',
@@ -248,8 +246,8 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_GITHUB_PHOTOS',
   },
   meetup: {
-    names: [ `.groupMember-name ${STYLES.hidden}` ], 
-    photos: [ `.avatar, .text--bold ${STYLES.blur}` ], 
+    names: [ `.groupMember-name, .memName ${STYLES.hidden}` ], 
+    photos: [ `.avatar, .text--bold, .mem-photo-background-60 ${STYLES.blur}` ], 
     nameId: 'BIAS_MEETUP_NAMES', 
     photoId: 'BIAS_MEETUP_PHOTOS', 
   }, 
