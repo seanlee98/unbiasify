@@ -26,10 +26,15 @@
         "https://angel.co/*",
         "https://twitter.com/*",
         "https://repl.it/*",
-        "https://app.greenhouse.io/*", 
+        "https://app.greenhouse.io/*",
         "*://*.youtube.com/*", 
         "*://*.buzzfeed.com/*",
+<<<<<<< HEAD
         "*://*.crunchbase.com/*"
+=======
+        "*://*.github.com/*", 
+        "*://*.meetup.com/*"
+>>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
       ],
       "js": ["jquery.min.js", "myscript.js"]
     }

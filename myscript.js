@@ -10,11 +10,19 @@ const TOGGLE_GREENHOUSE_PHOTOS = 'toggleGreenhousePhotos'
 const TOGGLE_GREENHOUSE_NAMES = 'toggleGreenhouseNames'
 const TOGGLE_BUZZFEED_PHOTOS = 'toggleBuzzfeedPhotos'
 const TOGGLE_BUZZFEED_NAMES = 'toggleBuzzfeedNames'
+const TOGGLE_GITHUB_PHOTOS = 'toggleGitHubPhotos'
+const TOGGLE_GITHUB_NAMES = 'toggleGitHubNames'
+const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
+const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
 const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
 const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
+<<<<<<< HEAD
 const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
 const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
 
+=======
+ 
+>>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
@@ -22,8 +30,15 @@ const URLS = {
   replit: 'repl.it',
   greenhouse: 'greenhouse.io',
   buzzfeed: 'buzzfeed.com',
+<<<<<<< HEAD
   youtube: 'youtube.com',
   crunchbase: 'crunchbase.com'
+=======
+  github: 'github.com',
+  buzzfeed: 'buzzfeed.com', 
+  meetup: 'meetup.com',
+  youtube: 'youtube.com'
+>>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 }
 
 const STYLES = {
@@ -204,7 +219,7 @@ const STYLE_SHEETS = {
     ],
     nameId: 'BIAS_REPLIT_NAMES',
     photoId: 'BIAS_REPLIT_PHOTOS',
-  }, 
+  },
   greenhouse: {
     names: [
       `.person-name:before, .person-info-column .name:before ${STYLES.candidateName}`,
@@ -216,10 +231,33 @@ const STYLE_SHEETS = {
   },
   buzzfeed: {
     names: [  `.bold ${STYLES.hidden}`, ], 
-    photos: [ `.card__image ${STYLES.hidden}`, ], 
+    photos: [ `.card__image, 
+                  .wire-frame__img,
+                  .site-component-carousel__item__image, 
+                  .video-player,
+                  .item__image ${STYLES.blur}`, 
+              `.js-sidebar-content ${STYLES.hidden}`, 
+            ], 
     nameId: 'BIAS_BUZZFEED_NAMES', 
     photoId: 'BIAS_BUZZFEED_PHOTOS',
+  }, 
+  github: {
+    names: [
+      `span.p-name.vcard-fullname.d-block.overflow-hidden ${STYLES.hidden}`,
+    ],
+    photos: [
+      `img.avatar ${STYLES.blur}`,
+      `img.avatar.width-full.rounded-2 ${STYLES.blur}`,
+    ],
+    nameId: 'BIAS_GITHUB_NAMES',
+    photoId: 'BIAS_GITHUB_PHOTOS',
   },
+  meetup: {
+    names: [ `.groupMember-name ${STYLES.hidden}` ], 
+    photos: [ `.avatar, .text--bold ${STYLES.blur}` ], 
+    nameId: 'BIAS_MEETUP_NAMES', 
+    photoId: 'BIAS_MEETUP_PHOTOS', 
+  }, 
   youtube: {
     names: [  `.bold ${STYLES.hidden}`, ], 
     photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
@@ -266,6 +304,16 @@ var buzzfeedUpdater = createModel(
   TOGGLE_BUZZFEED_PHOTOS,
   TOGGLE_BUZZFEED_NAMES
 )()
+var githubUpdater = createModel(
+  'github',
+  TOGGLE_GITHUB_PHOTOS,
+  TOGGLE_GITHUB_NAMES
+)()
+var meetupUpdater = createModel(
+  'meetup',
+  TOGGLE_MEETUP_PHOTOS,
+  TOGGLE_MEETUP_NAMES
+)()
 var youtubeUpdater = createModel(
   'youtube',
   TOGGLE_YOUTUBE_PHOTOS,
@@ -291,6 +339,10 @@ changeAll = (isSet = false, val = true) => {
   greenhouseUpdater('names', isSet, val)
   buzzfeedUpdater('photos', isSet, val)
   buzzfeedUpdater('names', isSet, val)
+  githubUpdater('photos', isSet, val)
+  githubUpdater('names', isSet, val)
+  meetupUpdater('photos', isSet, val)
+  meetupUpdater('names', isSet, val)
   youtubeUpdater('photos', isSet, val)
   youtubeUpdater('names', isSet, val)
   crunchbaseUpdater('photos', isSet, val)
@@ -356,6 +408,10 @@ getIntitialVal(TOGGLE_GREENHOUSE_PHOTOS, greenhouseUpdater, 'photos')
 getIntitialVal(TOGGLE_GREENHOUSE_NAMES, greenhouseUpdater, 'names')
 getIntitialVal(TOGGLE_BUZZFEED_PHOTOS, buzzfeedUpdater, 'photos')
 getIntitialVal(TOGGLE_BUZZFEED_NAMES, buzzfeedUpdater, 'names')
+getIntitialVal(TOGGLE_GITHUB_PHOTOS, githubUpdater, 'photos')
+getIntitialVal(TOGGLE_GITHUB_NAMES, githubUpdater, 'names')
+getIntitialVal(TOGGLE_MEETUP_PHOTOS, meetupUpdater, 'photos')
+getIntitialVal(TOGGLE_MEETUP_NAMES, meetupUpdater, 'names')
 getIntitialVal(TOGGLE_YOUTUBE_PHOTOS, youtubeUpdater, 'photos')
 getIntitialVal(TOGGLE_YOUTUBE_NAMES, youtubeUpdater, 'names')
 getIntitialVal(TOGGLE_CRUNCHBASE_PHOTOS, crunchbaseUpdater, 'photos')
@@ -437,12 +493,23 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     case request.toggleGreenhousePhotos:
       greenhouseUpdater('photos', true)
       break
-    case request.toggleBuzzfeedPhotos: 
+    case request.toggleBuzzfeedPhotos:
       buzzfeedUpdater('photos', true)
-      break 
-    case request.toggleBuzzfeedNames: 
+      break
+    case request.toggleBuzzfeedNames:
       buzzfeedUpdater('names', true)
+      break
+    case request.toggleGitHubPhotos:
+      githubUpdater('photos', true)
+      break
+    case request.toggleGitHubNames:
+      githubUpdater('names', true)
       break 
+    case request.toggleMeetupPhotos: 
+      meetupUpdater('photos', true)
+      break 
+    case request.toggleMeetupNames: 
+      meetupUpdater('names', true)
     case request.toggleYoutubePhotos: 
       youtubeUpdater('photos', true)
       break 

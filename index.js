@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
   var $clearGreenhouseNames = $('#clear-greenhouse-names')
   var $clearBuzzfeedPhotos = $('#clear-buzzfeed-photos')
   var $clearBuzzfeedNames = $('#clear-buzzfeed-names')
+  var $clearGitHubPhotos = $('#clear-github-photos')
+  var $clearGitHubNames = $('#clear-github-names')
+  var $clearMeetupPhotos = $('#clear-meetup-photos')
+  var $clearMeetupNames = $('#clear-meetup-names')
   var $clearYoutubePhotos = $('#clear-youtube-photos')
   var $clearYoutubeNames = $('#clear-youtube-names')
   var $clearCrunchbasePhotos = $('#clear-crunchbase-photos')
@@ -28,6 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const TOGGLE_GREENHOUSE_NAMES = 'toggleGreenhouseNames'
   const TOGGLE_BUZZFEED_PHOTOS = 'toggleBuzzfeedPhotos'
   const TOGGLE_BUZZFEED_NAMES = 'toggleBuzzfeedNames'
+  const TOGGLE_GITHUB_PHOTOS = 'toggleGitHubPhotos'
+  const TOGGLE_GITHUB_NAMES = 'toggleGitHubNames'
+  const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
+  const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
   const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
   const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
   const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
@@ -45,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
   setInitialValues(TOGGLE_GREENHOUSE_NAMES, $clearGreenhouseNames)
   setInitialValues(TOGGLE_BUZZFEED_PHOTOS, $clearBuzzfeedPhotos)
   setInitialValues(TOGGLE_BUZZFEED_NAMES, $clearBuzzfeedNames)
+  setInitialValues(TOGGLE_GITHUB_PHOTOS, $clearGitHubPhotos)
+  setInitialValues(TOGGLE_GITHUB_NAMES, $clearGitHubNames)
+  setInitialValues(TOGGLE_MEETUP_PHOTOS, $clearMeetupPhotos)
+  setInitialValues(TOGGLE_MEETUP_NAMES, $clearMeetupNames)
   setInitialValues(TOGGLE_YOUTUBE_PHOTOS, $clearYoutubePhotos)
   setInitialValues(TOGGLE_YOUTUBE_NAMES, $clearYoutubeNames)
   setInitialValues(TOGGLE_CRUNCHBASE_PHOTOS, $clearCrunchbasePhotos)
@@ -98,6 +110,22 @@ document.addEventListener('DOMContentLoaded', function() {
     sendMessage({ toggleBuzzfeedNames: true })
   })
 
+  $clearGitHubPhotos.off().on('change', function() {
+    sendMessage({ toggleGitHubPhotos: true })
+  })
+
+  $clearGitHubNames.off().on('change', function() {
+    sendMessage({ toggleGitHubNames: true })
+  })
+
+  $clearMeetupPhotos.off().on('change', function() {
+    sendMessage({ toggleMeetupPhotos: true })
+  })
+
+  $clearMeetupNames.off().on('change', function() {
+    sendMessage({ toggleMeetupNames: true })
+  })
+
   $clearYoutubePhotos.off().on('change', function() {
     sendMessage({ toggleYoutubePhotos: true })
   })
@@ -120,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
   }
+
   function setInitialValues(identifier, toggleInput) {
     chrome.storage.sync.get(identifier, function(data) {
       val = data[identifier]
