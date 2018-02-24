@@ -12,6 +12,8 @@ const TOGGLE_BUZZFEED_PHOTOS = 'toggleBuzzfeedPhotos'
 const TOGGLE_BUZZFEED_NAMES = 'toggleBuzzfeedNames'
 const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
 const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
+const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
+const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
 
 const URLS = {
   linkedIn: 'linkedin.com',
@@ -20,7 +22,8 @@ const URLS = {
   replit: 'repl.it',
   greenhouse: 'greenhouse.io',
   buzzfeed: 'buzzfeed.com',
-  youtube: 'youtube.com'
+  youtube: 'youtube.com',
+  crunchbase: 'crunchbase.com'
 }
 
 const STYLES = {
@@ -222,6 +225,14 @@ const STYLE_SHEETS = {
     photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
     nameId: 'BIAS_YOUTUBE_NAMES', 
     photoId: 'BIAS_YOUTUBE_PHOTOS',
+  },
+  crunchbase: {
+    names: [  `a[href^="/person/"] ${STYLES.hidden}`,
+    `a[href^="/person/"]:before ${STYLES.linkText}`,], 
+    //names: [  `.flex-gt-sm-75.cb-padding-medium-bottom.ng-star-inserted:nth-of-type(6) ${STYLES.linkText}`, ], 
+    photos: [ `.cb-image-with-placeholder ${STYLES.hidden}`, ], 
+    nameId: 'BIAS_CRUNCHBASE_NAMES', 
+    photoId: 'BIAS_CRUNCHBASE_PHOTOS',
   }
 }
 
@@ -260,6 +271,12 @@ var youtubeUpdater = createModel(
   TOGGLE_YOUTUBE_PHOTOS,
   TOGGLE_YOUTUBE_NAMES
 )()
+var crunchbaseUpdater = createModel(
+  'crunchbase',
+  TOGGLE_CRUNCHBASE_PHOTOS,
+  TOGGLE_CRUNCHBASE_NAMES
+)()
+
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
@@ -276,6 +293,8 @@ changeAll = (isSet = false, val = true) => {
   buzzfeedUpdater('names', isSet, val)
   youtubeUpdater('photos', isSet, val)
   youtubeUpdater('names', isSet, val)
+  crunchbaseUpdater('photos', isSet, val)
+  crunchbaseUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -339,6 +358,8 @@ getIntitialVal(TOGGLE_BUZZFEED_PHOTOS, buzzfeedUpdater, 'photos')
 getIntitialVal(TOGGLE_BUZZFEED_NAMES, buzzfeedUpdater, 'names')
 getIntitialVal(TOGGLE_YOUTUBE_PHOTOS, youtubeUpdater, 'photos')
 getIntitialVal(TOGGLE_YOUTUBE_NAMES, youtubeUpdater, 'names')
+getIntitialVal(TOGGLE_CRUNCHBASE_PHOTOS, crunchbaseUpdater, 'photos')
+getIntitialVal(TOGGLE_CRUNCHBASE_NAMES, crunchbaseUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -427,6 +448,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break 
     case request.toggleYoutubeNames: 
       youtubeUpdater('names', true)
+      break 
+    case request.toggleCrunchbasePhotos: 
+      crunchbaseUpdater('photos', true)
+      break 
+    case request.toggleCrunchbaseNames: 
+      crunchbaseUpdater('names', true)
       break 
   }
 })
