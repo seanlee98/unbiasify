@@ -16,7 +16,13 @@ const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
 const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
 const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
 const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
+<<<<<<< HEAD
+const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
+const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
+
+=======
  
+>>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
@@ -24,10 +30,15 @@ const URLS = {
   replit: 'repl.it',
   greenhouse: 'greenhouse.io',
   buzzfeed: 'buzzfeed.com',
+<<<<<<< HEAD
+  youtube: 'youtube.com',
+  crunchbase: 'crunchbase.com'
+=======
   github: 'github.com',
   buzzfeed: 'buzzfeed.com', 
   meetup: 'meetup.com',
   youtube: 'youtube.com'
+>>>>>>> 8f21ffe62213ed1e85f880159a7abfb604bd93e7
 }
 
 const STYLES = {
@@ -35,6 +46,7 @@ const STYLES = {
   hiddenRelative: '{ visibility: hidden !important; position: relative; }',
   linkText: '{ content: "Link to Profile"; visibility: visible; }',
   candidateName: '{ content: "Candidate Name"; visibility: visible; }',
+  videoName: '{ text-transform: lowercase; visibility: visible; }',
   blur:
     '{ opacity: 0.5; -webkit-filter: blur(50px) !important; filter: blur(50px) !important; }',
   colorToBlack:
@@ -248,10 +260,18 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_MEETUP_PHOTOS', 
   }, 
   youtube: {
-    names: [  `.bold ${STYLES.hidden}`, ], 
+    names: [  `a[id*="video-title"] ${STYLES.videoName}`, ], 
     photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
     nameId: 'BIAS_YOUTUBE_NAMES', 
     photoId: 'BIAS_YOUTUBE_PHOTOS',
+  },
+  crunchbase: {
+    names: [  `a[href^="/person/"] ${STYLES.hidden}`,
+    `a[href^="/person/"]:before ${STYLES.linkText}`,], 
+    //names: [  `.flex-gt-sm-75.cb-padding-medium-bottom.ng-star-inserted:nth-of-type(6) ${STYLES.linkText}`, ], 
+    photos: [ `.cb-image-with-placeholder ${STYLES.hidden}`, ], 
+    nameId: 'BIAS_CRUNCHBASE_NAMES', 
+    photoId: 'BIAS_CRUNCHBASE_PHOTOS',
   }
 }
 
@@ -300,6 +320,12 @@ var youtubeUpdater = createModel(
   TOGGLE_YOUTUBE_PHOTOS,
   TOGGLE_YOUTUBE_NAMES
 )()
+var crunchbaseUpdater = createModel(
+  'crunchbase',
+  TOGGLE_CRUNCHBASE_PHOTOS,
+  TOGGLE_CRUNCHBASE_NAMES
+)()
+
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
@@ -320,6 +346,8 @@ changeAll = (isSet = false, val = true) => {
   meetupUpdater('names', isSet, val)
   youtubeUpdater('photos', isSet, val)
   youtubeUpdater('names', isSet, val)
+  crunchbaseUpdater('photos', isSet, val)
+  crunchbaseUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -387,6 +415,8 @@ getIntitialVal(TOGGLE_MEETUP_PHOTOS, meetupUpdater, 'photos')
 getIntitialVal(TOGGLE_MEETUP_NAMES, meetupUpdater, 'names')
 getIntitialVal(TOGGLE_YOUTUBE_PHOTOS, youtubeUpdater, 'photos')
 getIntitialVal(TOGGLE_YOUTUBE_NAMES, youtubeUpdater, 'names')
+getIntitialVal(TOGGLE_CRUNCHBASE_PHOTOS, crunchbaseUpdater, 'photos')
+getIntitialVal(TOGGLE_CRUNCHBASE_NAMES, crunchbaseUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -486,6 +516,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break 
     case request.toggleYoutubeNames: 
       youtubeUpdater('names', true)
+      break 
+    case request.toggleCrunchbasePhotos: 
+      crunchbaseUpdater('photos', true)
+      break 
+    case request.toggleCrunchbaseNames: 
+      crunchbaseUpdater('names', true)
       break 
   }
 })
