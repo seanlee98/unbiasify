@@ -12,7 +12,11 @@ const TOGGLE_BUZZFEED_PHOTOS = 'toggleBuzzfeedPhotos'
 const TOGGLE_BUZZFEED_NAMES = 'toggleBuzzfeedNames'
 const TOGGLE_GITHUB_PHOTOS = 'toggleGitHubPhotos'
 const TOGGLE_GITHUB_NAMES = 'toggleGitHubNames'
-
+const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
+const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
+const TOGGLE_YOUTUBE_PHOTOS = 'toggleYoutubePhotos'
+const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
+ 
 const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
@@ -21,6 +25,9 @@ const URLS = {
   greenhouse: 'greenhouse.io',
   buzzfeed: 'buzzfeed.com',
   github: 'github.com',
+  buzzfeed: 'buzzfeed.com', 
+  meetup: 'meetup.com',
+  youtube: 'youtube.com'
 }
 
 const STYLES = {
@@ -212,11 +219,16 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_GREENHOUSE_PHOTOS',
   },
   buzzfeed: {
-    names: [`.bold ${STYLES.hidden}`],
-    photos: [`.card__image ${STYLES.hidden}`],
-    nameId: 'BIAS_BUZZFEED_NAMES',
+    names: [  `.bold ${STYLES.hidden}`, ], 
+    photos: [ `.card__image, 
+                  .wire-frame__img,
+                  .site-component-carousel__item__image, 
+                  .video-player,
+                  .item__image ${STYLES.blur}`, 
+            ], 
+    nameId: 'BIAS_BUZZFEED_NAMES', 
     photoId: 'BIAS_BUZZFEED_PHOTOS',
-  },
+  }, 
   github: {
     names: [
       `span.p-name.vcard-fullname.d-block.overflow-hidden ${STYLES.hidden}`,
@@ -228,6 +240,18 @@ const STYLE_SHEETS = {
     nameId: 'BIAS_GITHUB_NAMES',
     photoId: 'BIAS_GITHUB_PHOTOS',
   },
+  meetup: {
+    names: [ `.groupMember-name ${STYLES.hidden}` ], 
+    photos: [ `.avatar, .text--bold ${STYLES.blur}` ], 
+    nameId: 'BIAS_MEETUP_NAMES', 
+    photoId: 'BIAS_MEETUP_PHOTOS', 
+  }, 
+  youtube: {
+    names: [  `.bold ${STYLES.hidden}`, ], 
+    photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
+    nameId: 'BIAS_YOUTUBE_NAMES', 
+    photoId: 'BIAS_YOUTUBE_PHOTOS',
+  }
 }
 
 var linkedinUpdater = createModel(
@@ -264,6 +288,15 @@ var githubUpdater = createModel(
   'github',
   TOGGLE_GITHUB_PHOTOS,
   TOGGLE_GITHUB_NAMES
+var meetupUpdater = createModel(
+  'meetup',
+  TOGGLE_MEETUP_PHOTOS,
+  TOGGLE_MEETUP_NAMES
+)()
+var youtubeUpdater = createModel(
+  'youtube',
+  TOGGLE_YOUTUBE_PHOTOS,
+  TOGGLE_YOUTUBE_NAMES
 )()
 
 changeAll = (isSet = false, val = true) => {
@@ -281,6 +314,10 @@ changeAll = (isSet = false, val = true) => {
   buzzfeedUpdater('names', isSet, val)
   githubUpdater('photos', isSet, val)
   githubUpdater('names', isSet, val)
+  meetupUpdater('photos', isSet, val)
+  meetupUpdater('names', isSet, val)
+  youtubeUpdater('photos', isSet, val)
+  youtubeUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -344,6 +381,10 @@ getIntitialVal(TOGGLE_BUZZFEED_PHOTOS, buzzfeedUpdater, 'photos')
 getIntitialVal(TOGGLE_BUZZFEED_NAMES, buzzfeedUpdater, 'names')
 getIntitialVal(TOGGLE_GITHUB_PHOTOS, githubUpdater, 'photos')
 getIntitialVal(TOGGLE_GITHUB_NAMES, githubUpdater, 'names')
+getIntitialVal(TOGGLE_MEETUP_PHOTOS, meetupUpdater, 'photos')
+getIntitialVal(TOGGLE_MEETUP_NAMES, meetupUpdater, 'names')
+getIntitialVal(TOGGLE_YOUTUBE_PHOTOS, youtubeUpdater, 'photos')
+getIntitialVal(TOGGLE_YOUTUBE_NAMES, youtubeUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -432,6 +473,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break
     case request.toggleGitHubNames:
       githubUpdater('names', true)
-      break
+      break 
+    case request.toggleMeetupPhotos: 
+      meetupUpdater('photos', true)
+      break 
+    case request.toggleMeetupNames: 
+      meetupUpdater('names', true)
+    case request.toggleYoutubePhotos: 
+      youtubeUpdater('photos', true)
+      break 
+    case request.toggleYoutubeNames: 
+      youtubeUpdater('names', true)
+      break 
   }
 })
