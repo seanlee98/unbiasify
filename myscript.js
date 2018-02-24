@@ -19,6 +19,7 @@ const TOGGLE_YOUTUBE_NAMES = 'toggleYoutubeNames'
 const TOGGLE_CRUNCHBASE_PHOTOS = 'toggleCrunchbasePhotos'
 const TOGGLE_CRUNCHBASE_NAMES = 'toggleCrunchbaseNames'
 
+ const URLS = {
   linkedIn: 'linkedin.com',
   twitter: 'twitter.com',
   angelList: 'angel.co',
