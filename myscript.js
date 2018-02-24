@@ -253,7 +253,7 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_MEETUP_PHOTOS', 
   }, 
   youtube: {
-    names: [  `a[id*="video-title"] ${STYLES.videoName}`, ], 
+    names: [  `a[id*="video-title"], span[id*="video-title"] ${STYLES.videoName}`, ], 
     photos: [ `.ytd-thumbnail ${STYLES.hidden}`, ], 
     nameId: 'BIAS_YOUTUBE_NAMES', 
     photoId: 'BIAS_YOUTUBE_PHOTOS',
