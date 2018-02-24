@@ -26,9 +26,10 @@
         "https://angel.co/*",
         "https://twitter.com/*",
         "https://repl.it/*",
-        "https://app.greenhouse.io/*", 
-        "*://*.youtube.com/*", 
-        "*://*.buzzfeed.com/*"
+        "https://app.greenhouse.io/*",
+        "*://*.youtube.com/*",
+        "*://*.buzzfeed.com/*",
+        "*://*.github.com/*"
       ],
       "js": ["jquery.min.js", "myscript.js"]
     }

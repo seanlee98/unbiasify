@@ -10,6 +10,8 @@ const TOGGLE_GREENHOUSE_PHOTOS = 'toggleGreenhousePhotos'
 const TOGGLE_GREENHOUSE_NAMES = 'toggleGreenhouseNames'
 const TOGGLE_BUZZFEED_PHOTOS = 'toggleBuzzfeedPhotos'
 const TOGGLE_BUZZFEED_NAMES = 'toggleBuzzfeedNames'
+const TOGGLE_GITHUB_PHOTOS = 'toggleGitHubPhotos'
+const TOGGLE_GITHUB_NAMES = 'toggleGitHubNames'
 
 const URLS = {
   linkedIn: 'linkedin.com',
@@ -17,7 +19,8 @@ const URLS = {
   angelList: 'angel.co',
   replit: 'repl.it',
   greenhouse: 'greenhouse.io',
-  buzzfeed: 'buzzfeed.com'
+  buzzfeed: 'buzzfeed.com',
+  github: 'github.com',
 }
 
 const STYLES = {
@@ -198,7 +201,7 @@ const STYLE_SHEETS = {
     ],
     nameId: 'BIAS_REPLIT_NAMES',
     photoId: 'BIAS_REPLIT_PHOTOS',
-  }, 
+  },
   greenhouse: {
     names: [
       `.person-name:before, .person-info-column .name:before ${STYLES.candidateName}`,
@@ -209,11 +212,22 @@ const STYLE_SHEETS = {
     photoId: 'BIAS_GREENHOUSE_PHOTOS',
   },
   buzzfeed: {
-    names: [  `.bold ${STYLES.hidden}`, ], 
-    photos: [ `.card__image ${STYLES.hidden}`, ], 
-    nameId: 'BIAS_BUZZFEED_NAMES', 
+    names: [`.bold ${STYLES.hidden}`],
+    photos: [`.card__image ${STYLES.hidden}`],
+    nameId: 'BIAS_BUZZFEED_NAMES',
     photoId: 'BIAS_BUZZFEED_PHOTOS',
-  }
+  },
+  github: {
+    names: [
+      `span.p-name.vcard-fullname.d-block.overflow-hidden ${STYLES.hidden}`,
+    ],
+    photos: [
+      `img.avatar ${STYLES.blur}`,
+      `img.avatar.width-full.rounded-2 ${STYLES.blur}`,
+    ],
+    nameId: 'BIAS_GITHUB_NAMES',
+    photoId: 'BIAS_GITHUB_PHOTOS',
+  },
 }
 
 var linkedinUpdater = createModel(
@@ -246,6 +260,11 @@ var buzzfeedUpdater = createModel(
   TOGGLE_BUZZFEED_PHOTOS,
   TOGGLE_BUZZFEED_NAMES
 )()
+var githubUpdater = createModel(
+  'github',
+  TOGGLE_GITHUB_PHOTOS,
+  TOGGLE_GITHUB_NAMES
+)()
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
@@ -260,6 +279,8 @@ changeAll = (isSet = false, val = true) => {
   greenhouseUpdater('names', isSet, val)
   buzzfeedUpdater('photos', isSet, val)
   buzzfeedUpdater('names', isSet, val)
+  githubUpdater('photos', isSet, val)
+  githubUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -321,6 +342,8 @@ getIntitialVal(TOGGLE_GREENHOUSE_PHOTOS, greenhouseUpdater, 'photos')
 getIntitialVal(TOGGLE_GREENHOUSE_NAMES, greenhouseUpdater, 'names')
 getIntitialVal(TOGGLE_BUZZFEED_PHOTOS, buzzfeedUpdater, 'photos')
 getIntitialVal(TOGGLE_BUZZFEED_NAMES, buzzfeedUpdater, 'names')
+getIntitialVal(TOGGLE_GITHUB_PHOTOS, githubUpdater, 'photos')
+getIntitialVal(TOGGLE_GITHUB_NAMES, githubUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -398,11 +421,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     case request.toggleGreenhousePhotos:
       greenhouseUpdater('photos', true)
       break
-    case request.toggleBuzzfeedPhotos: 
+    case request.toggleBuzzfeedPhotos:
       buzzfeedUpdater('photos', true)
-      break 
-    case request.toggleBuzzfeedNames: 
+      break
+    case request.toggleBuzzfeedNames:
       buzzfeedUpdater('names', true)
-      break 
+      break
+    case request.toggleGitHubPhotos:
+      githubUpdater('photos', true)
+      break
+    case request.toggleGitHubNames:
+      githubUpdater('names', true)
+      break
   }
 })
