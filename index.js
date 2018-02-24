@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   $clearGitHubNames.off().on('change', function() {
     sendMessage({ toggleGitHubNames: true })
+  })
 
   $clearMeetupPhotos.off().on('change', function() {
     sendMessage({ toggleMeetupPhotos: true })
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
   }
+
   function setInitialValues(identifier, toggleInput) {
     chrome.storage.sync.get(identifier, function(data) {
       val = data[identifier]

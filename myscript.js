@@ -289,6 +289,7 @@ var githubUpdater = createModel(
   'github',
   TOGGLE_GITHUB_PHOTOS,
   TOGGLE_GITHUB_NAMES
+)()
 var meetupUpdater = createModel(
   'meetup',
   TOGGLE_MEETUP_PHOTOS,
