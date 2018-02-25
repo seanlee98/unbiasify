@@ -2,7 +2,7 @@
 # Welcome to Unbiasify
 Unbiasify is a tool to help reduce the amount of unconscious bias that people face when perusing many aspects of the internet.
 
-The current functionality includes the ability to obfuscate/remove names and avatars from linkedin.
+The current functionality includes the ability to obfuscate/remove names and avatars from LinkedIn, block thumbnails on YouTube, hide names and avatars on meetup.com, etc.
 
 If you'd just like access to the tool, you can install it over at the chrome store 
 <!-- TODO: Add a link -->
@@ -25,13 +25,19 @@ Next; all you have to do is go to linked in and click that icon. Depending on wh
 * Linkedin -- free version only
 * Angellist
 * Twitter
+* YouTube
+* Github
+* Buzzfeed
+* Crunchbase
+* Meetup
+
 
 # Local Installation Steps
 
 ### Get the code
 The very first step is to download the project. You can either do this via git if you're comfortable with that:
 
-`git clone git@github.com:Unbiasify/unbiasify.git`
+`git clone https://github.com/seanlee98/unbiasify.git`
 
 or download the zip file from the button seen here:
 
